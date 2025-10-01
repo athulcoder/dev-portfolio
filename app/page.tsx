@@ -1,10 +1,11 @@
+import Hero from "@/components/Hero";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="relative">
-      <div>
-        <h1>Site under construction !! Please stay with us </h1>
+    <main className="relative bg-gray-900  flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
+      <div  className="max-w-7xl w-full">
+       <Hero/>
       </div>
     </main>
   );
