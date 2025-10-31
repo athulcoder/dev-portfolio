@@ -1,3 +1,0 @@
-# My Portfolio site
-
-currently this site is under construction
