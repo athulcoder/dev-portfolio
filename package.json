@@ -16,10 +16,12 @@
     "@react-three/postprocessing": "^3.0.4",
     "@tailwindcss/vite": "^4.1.16",
     "gsap": "^3.13.0",
+    "postprocessing": "^6.37.8",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-responsive": "^10.0.1",
     "tailwindcss": "^4.1.16",
-    "three": "^0.181.0"
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
