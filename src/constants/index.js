@@ -71,6 +71,44 @@ const logoIconsList = [
   },
 ];
 
+export const works = [
+  {
+    title: "Hostel Room Allotment System",
+    desc: "An admin-only room allotment system built using Java Swing and SQLite for smart hostel room assignments.",
+    imagePath: "/projects/hostel-room-allotment.png",
+    githubUrl: "https://github.com/athulcoder/hostel-room-allotment-system",
+    previewUrl: "",
+  },
+  {
+    title: "DailyDone",
+    desc: "A full-stack task management system built with Next.js 15, MongoDB, and JWT authentication for secure, personalized productivity tracking.",
+    imagePath: "/projects/dailydone.png",
+    githubUrl: "https://github.com/athulcoder/dailydone",
+    previewUrl: "https://dailydone.vercel.app",
+  },
+  {
+    title: "Instagram Clone",
+    desc: "A mobile app clone of Instagram built with Flutter and Firebase for real-time data sync and authentication.",
+    imagePath: "/projects/instagram-clone.png",
+    githubUrl: "https://github.com/athulcoder/instagram-clone",
+    previewUrl: "",
+  },
+  {
+    title: "CineQuest",
+    desc: "A movie discovery platform using Vanilla JS and the TMDB API, displaying ratings, trailers, and stats with a clean UI.",
+    imagePath: "/projects/cinequest.png",
+    githubUrl: "https://github.com/athulcoder/cinequest",
+    previewUrl: "https://athulcoder.github.io/cinequest",
+  },
+  {
+    title: "C to PDF Converter",
+    desc: "A Flask web app hosted on Render, converting raw C files into formatted printable PDFs for lab submissions using WebSockets. Widely used by students across departments.",
+    imagePath: "/projects/c-to-pdf.png",
+    githubUrl: "https://github.com/athulcoder/c-to-pdf",
+    previewUrl: "",
+  },
+];
+
 const abilities = [
   {
     imgPath: "/images/seo.png",
