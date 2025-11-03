@@ -104,8 +104,8 @@ export const works = [
     title: "C to PDF Converter",
     desc: "A Flask web app hosted on Render, converting raw C files into formatted printable PDFs for lab submissions using WebSockets. Widely used by students across departments.",
     imagePath: "/images/project5.png",
-    githubUrl: "https://github.com/athulcoder/c-to-pdf",
-    previewUrl: "c-to-pdf.onrender.com",
+    githubUrl: "https://github.com/athulcoder/c_to_pdf",
+    previewUrl: "https://c-to-pdf.onrender.com",
   },
 ];
 
