@@ -1,10 +1,10 @@
 import React from "react";
 import { words } from "../constants";
 import Button from "../components/Button";
-import HeroExperience from "../components/HeroModels/HeroExperience";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import AnimatedCounters from "../components/AnimatedCounters";
+import { HeroCardBackground } from "@/components/3DHeroModel";
 const Hero = () => {
   useGSAP(() => {
     gsap.fromTo(
@@ -69,11 +69,11 @@ const Hero = () => {
 
         {/* RIGHT SIDE : 3D MODEL */}
 
-        {/* <figure>
-          <div className="hero-3d-layout">
-            <HeroExperience />
+        <figure>
+          <div className="hero-3d-layout max-lg:mt-[120px]">
+            <HeroCardBackground />
           </div>
-        </figure> */}
+        </figure>
       </div>
 
       <AnimatedCounters />
