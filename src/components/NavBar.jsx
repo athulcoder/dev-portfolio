@@ -1,5 +1,6 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import React from "react";
+import { navLinks } from "@/constants";
 
 const NavBar = () => {
   return (
@@ -9,7 +10,20 @@ const NavBar = () => {
           Athul Sabu
         </a>
 
-        <nav className="desktop"></nav>
+        <nav className="desktop">
+          <ul>
+            {navLinks.map(({ link, name }) => {
+              return (
+                <li className="group" key={name}>
+                  <a href={link}>
+                    <span>{name}</span>
+                    <span className="underline" />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
 
         <div className="group flex gap-4">
           <a target="__blank" href="https://github.com/athulcoder">
