@@ -27,13 +27,13 @@ const NavBar = () => {
 
         <div className="group flex gap-4">
           <a target="__blank" href="https://github.com/athulcoder">
-            <FaGithub size={20} />
+            <FaGithub size={25} />
           </a>
           <a
             target="__blank"
             href="https://www.linkedin.com/in/athul-sabu-84360a261/"
           >
-            <FaLinkedin size={20} />
+            <FaLinkedin size={25} />
           </a>
         </div>
       </div>
