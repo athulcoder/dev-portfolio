@@ -12,6 +12,7 @@ const App = () => {
       <Hero />
       <Languages />
       <ShowcaseSection />
+      <Footer />
     </>
   );
 };
