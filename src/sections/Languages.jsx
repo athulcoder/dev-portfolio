@@ -3,7 +3,7 @@ import { FaJava } from "react-icons/fa";
 import { SiPython, SiJavascript, SiCplusplus, SiC } from "react-icons/si";
 
 const skills = [
-  { name: "Python", years: "5 years", icon: SiPython, color: "#22c55e" },
+  { name: "Python", years: "2 years", icon: SiPython, color: "#22c55e" },
   {
     name: "JavaScript",
     years: "2 years",
@@ -15,7 +15,7 @@ const skills = [
   { name: "Java", years: "2 years", icon: FaJava, color: "#ef4444" },
 ];
 
-// Open maze-like path
+// Maze-like open path
 const PATH = "M 50 250 V 50 H 250 V 250 H 450 V 50";
 
 const FLOW_SPEED_MS = 6000;
@@ -50,16 +50,16 @@ const SkillPath = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-10 bg-black rounded-xl shadow-xl">
-      <h2 className="text-white text-3xl sm:text-4xl font-bold text-center mb-6">
-        Languages
+    <div className="w-full max-w-6xl mx-auto px-6 py-14 bg-black rounded-xl shadow-xl">
+      <h2 className="text-white text-4xl sm:text-5xl font-bold text-center mb-10">
+        ⚡ Skills Maze Path
       </h2>
 
       {/* Responsive SVG wrapper */}
       <div className="w-full overflow-x-auto flex justify-center">
         <svg
           viewBox="0 0 500 300"
-          className="w-[500px] max-w-full h-auto"
+          className="w-[650px] sm:w-[700px] md:w-[800px] lg:w-[900px] max-w-full h-auto"
           preserveAspectRatio="xMidYMid meet"
         >
           <defs>
@@ -76,7 +76,7 @@ const SkillPath = () => {
             d={PATH}
             fill="none"
             stroke="#374151"
-            strokeWidth="2"
+            strokeWidth="2.2"
             strokeLinecap="round"
           />
 
@@ -85,9 +85,9 @@ const SkillPath = () => {
             d={PATH}
             fill="none"
             stroke="url(#snakeGrad)"
-            strokeWidth="4"
-            strokeDasharray="40 800"
-            strokeDashoffset={-snakePos * 800}
+            strokeWidth="5"
+            strokeDasharray="40 900"
+            strokeDashoffset={-snakePos * 900}
             style={{ filter: "drop-shadow(0 0 6px #3b82f6)" }}
           />
 
@@ -103,22 +103,23 @@ const SkillPath = () => {
                 style={{ transition: "0.3s" }}
               >
                 <circle
-                  r="15"
+                  r="20"
                   fill="#0f172a"
                   stroke={glow ? "url(#snakeGrad)" : "#475569"}
-                  strokeWidth={glow ? 4 : 2}
+                  strokeWidth={glow ? 5 : 3}
                   style={{
-                    filter: glow ? "drop-shadow(0 0 10px #3b82f6)" : "none",
+                    filter: glow ? "drop-shadow(0 0 12px #3b82f6)" : "none",
                     transition: "0.3s",
                   }}
                 />
 
-                <foreignObject x="-10" y="-10" width="20" height="20">
+                {/* Icon */}
+                <foreignObject x="-14" y="-14" width="28" height="28">
                   <Icon
                     style={{
                       color: glow ? skills[i].color : "#ffffff",
-                      width: "20px",
-                      height: "20px",
+                      width: "28px",
+                      height: "28px",
                       transition: "0.3s",
                     }}
                   />
@@ -130,17 +131,17 @@ const SkillPath = () => {
       </div>
 
       {/* Labels below (fully responsive grid) */}
-      <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-center">
+      <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 text-center">
         {skills.map((s, i) => (
           <div key={i} className="flex flex-col items-center">
             <span
-              className={`font-semibold text-sm sm:text-base ${
+              className={`font-semibold text-base sm:text-lg ${
                 activeIndex === i ? "text-white" : "text-gray-300"
               }`}
             >
               {s.name}
             </span>
-            {/* <span className="text-xs text-gray-500">{s.years}</span> */}
+            <span className="text-xs text-gray-500">{s.years}</span>
           </div>
         ))}
       </div>
