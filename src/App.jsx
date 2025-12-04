@@ -4,6 +4,7 @@ import ShowcaseSection from "./sections/ShowcaseSection";
 import NavBar from "./components/NavBar";
 
 import Languages from "./sections/Languages";
+import Footer from "./sections/Footer";
 
 const App = () => {
   return (
