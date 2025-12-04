@@ -20,7 +20,7 @@ const PATH = "M 50 250 V 50 H 250 V 250 H 450 V 50";
 
 const FLOW_SPEED_MS = 6000;
 
-const SkillPath = () => {
+const Languages = () => {
   const pathRef = useRef(null);
   const [positions, setPositions] = useState([]);
   const [snakePos, setSnakePos] = useState(0);
@@ -54,7 +54,10 @@ const SkillPath = () => {
       className="w-full max-w-6xl mx-auto px-6 py-14 bg-black rounded-xl shadow-xl relative"
       id="skill"
     >
-      <div className="absolute top-5 left-6 z-10">
+      <div className="absolute bottom-40 left-40 z-10">
+        <img src="/images/bg.png" alt="background" />
+      </div>
+      <div className="absolute top-40 right-40 z-10">
         <img src="/images/bg.png" alt="background" />
       </div>
       <h2 className="text-white text-4xl sm:text-5xl font-bold text-center mb-10">
@@ -115,7 +118,7 @@ const SkillPath = () => {
                   strokeWidth={glow ? 5 : 3}
                   style={{
                     filter: glow ? "drop-shadow(0 0 12px #3b82f6)" : "none",
-                    transition: "0.3s",
+                    transition: "1.8s",
                   }}
                 />
 
@@ -126,7 +129,7 @@ const SkillPath = () => {
                       color: glow ? skills[i].color : "#ffffff",
                       width: "28px",
                       height: "28px",
-                      transition: "0.3s",
+                      transition: "1.8s",
                     }}
                   />
                 </foreignObject>
@@ -155,4 +158,4 @@ const SkillPath = () => {
   );
 };
 
-export default SkillPath;
+export default Languages;
