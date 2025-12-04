@@ -141,7 +141,7 @@ const SkillPath = () => {
             >
               {s.name}
             </span>
-            <span className="text-xs text-gray-500">{s.years}</span>
+            {/* <span className="text-xs text-gray-500">{s.years}</span> */}
           </div>
         ))}
       </div>
