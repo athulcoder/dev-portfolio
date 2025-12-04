@@ -52,7 +52,7 @@ const SkillPath = () => {
   return (
     <div className="w-full max-w-6xl mx-auto px-6 py-14 bg-black rounded-xl shadow-xl">
       <h2 className="text-white text-4xl sm:text-5xl font-bold text-center mb-10">
-        ⚡ Skills Maze Path
+        Languages
       </h2>
 
       {/* Responsive SVG wrapper */}
