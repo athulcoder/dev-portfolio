@@ -50,7 +50,10 @@ const SkillPath = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-6 py-14 bg-black rounded-xl shadow-xl relative">
+    <div
+      className="w-full max-w-6xl mx-auto px-6 py-14 bg-black rounded-xl shadow-xl relative"
+      id="skill"
+    >
       <div className="absolute top-5 left-6 z-10">
         <img src="/images/bg.png" alt="background" />
       </div>

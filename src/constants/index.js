@@ -11,7 +11,7 @@ const navLinks = [
   },
   {
     name: "Skills",
-    link: "#skills",
+    link: "#skill",
   },
 ];
 
