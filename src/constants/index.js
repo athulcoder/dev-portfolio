@@ -1,3 +1,5 @@
+import { FaDiscord, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+
 const navLinks = [
   {
     name: "Work",
@@ -281,6 +283,28 @@ const testimonials = [
   },
 ];
 
+const socialLinks = [
+  {
+    label: "GitHub",
+    icon: FaGithub,
+    url: "https://github.com/athulcoder",
+  },
+  {
+    label: "LinkedIn",
+    icon: FaLinkedin,
+    url: "https://www.linkedin.com/in/athul-sabu-84360a261/",
+  },
+  {
+    label: "Instagram",
+    icon: FaInstagram,
+    url: "https://instagram.com/_i_athul",
+  },
+  {
+    label: "Discord",
+    icon: FaDiscord,
+    url: "https://discord.com/users/_i_athul",
+  },
+];
 const socialImgs = [
   {
     name: "insta",
@@ -316,4 +340,5 @@ export {
   techStackIcons,
   techStackImgs,
   navLinks,
+  socialLinks,
 };

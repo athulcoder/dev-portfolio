@@ -1,4 +1,6 @@
+import { socialLinks } from "@/constants";
 import React from "react";
+import { FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -25,18 +27,15 @@ const Footer = () => {
 
         <div>
           <ul className="text-sm flex flex-row justify-around h-[100px] items-center">
-            <li>
-              <a href="#"></a>
-            </li>
-            <li>
-              <a href="#work"></a>
-            </li>
-            <li>
-              <a href="#"></a>
-            </li>
-            <li>
-              <a href="#"></a>
-            </li>
+            {socialLinks.map(({ label, icon: Icon, url }) => {
+              return (
+                <li key={label}>
+                  <a href={url}>
+                    <Icon />
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
