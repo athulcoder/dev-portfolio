@@ -594,3 +594,66 @@ section {
     @apply bg-background text-foreground;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+/* lang section css */
+@keyframes dashGlow {
+  0% {
+    stroke-dashoffset: 1000;
+    opacity: 0.3;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes iconGlow {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0px #4f8cff);
+    transform: scale(1);
+  }
+
+  50% {
+    filter: drop-shadow(0 0 10px #4f8cff);
+    transform: scale(1.15);
+  }
+}
+
+@keyframes lightMove {
+  0% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.animate-dash-glow {
+  animation: dashGlow 6s linear infinite;
+}
+
+.animate-icon-glow {
+  animation: iconGlow 3s ease-in-out infinite;
+}
+
+.animate-light-move {
+  animation: lightMove 2s ease-in-out infinite;
+}
