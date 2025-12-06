@@ -31,7 +31,7 @@ const ShowcaseSection = () => {
           rel="noopener noreferrer"
           className="text-indigo-400 font-semibold hover:text-indigo-300 transition-colors duration-300  decoration-indigo-500/50 hover:decoration-indigo-300"
         >
-          GitHub ->
+          GitHub
         </a>
       </p>
     </>
