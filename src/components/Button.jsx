@@ -6,7 +6,7 @@ const Button = ({ className, text, id }) => {
       onClick={(e) => {
         e.preventDefault();
 
-        let target = document.getElementById("counters");
+        let target = document.getElementById("work");
 
         if (target && id) {
           //
