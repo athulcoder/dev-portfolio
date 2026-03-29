@@ -2,16 +2,20 @@ import { FaDiscord, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const navLinks = [
   {
+    name: "About",
+    link: "#about",
+  },
+  {
+    name: "Journey",
+    link: "#timeline",
+  },
+  {
     name: "Work",
     link: "#work",
   },
   {
-    name: "Experience",
-    link: "#experience",
-  },
-  {
-    name: "Skills",
-    link: "#skill",
+    name: "Travel",
+    link: "#travel",
   },
 ];
 
@@ -328,6 +332,74 @@ const socialImgs = [
   },
 ];
 
+const milestones = [
+  { 
+    year: '2019', 
+    title: 'The Spark', 
+    desc: 'Started my developer journey as a small dev, exploring the world of code.',
+    image: '/images/p4.png' 
+  },
+  { 
+    year: '2020', 
+    title: 'Computer Science Foundation', 
+    desc: 'Joined +2 for Computer Science, formalizing my passion for logic and architecture.',
+    image: '/images/p5.png'
+  },
+  { 
+    year: '2024 (March)', 
+    title: 'Academic Milestone', 
+    desc: 'Successfully completed +2 and prepared for the next big leap in engineering.',
+    image: '/images/p6.png'
+  },
+  { 
+    year: '2024 (August)', 
+    title: 'MITS Engineering', 
+    desc: 'Joined BTech CSE at Muthoot Institute of Technology and Science (MITS) to pursue my passion professionally.',
+    image: '/images/p7.png'
+  },
+  { 
+    year: 'Freelancing', 
+    title: 'Global Exposure', 
+    desc: 'Began working on diverse freelance projects, delivering results for global clients.',
+    image: '/images/p8.png'
+  },
+  { 
+    year: 'Sem-3', 
+    title: 'MITS-PRINT Launch', 
+    desc: 'Initiated and developed the MITS-PRINT project, a streamlined solution for college printing services.',
+    image: '/images/p9.png'
+  },
+  { 
+    year: 'Sem-4', 
+    title: 'Professional Offer', 
+    desc: 'Received a software engineer contract offer from Infrocreon, a promising Kochi-based startup.',
+    image: '/images/p1.png'
+  },
+  { 
+    year: 'Sem-4', 
+    title: 'Innovation Champion', 
+    desc: 'Secured First Prize in the NEXUS AI Hackathon, showcasing advanced AI and problem-solving skills.',
+    image: '/images/p2.png'
+  },
+];
+
+const achievements = [
+  {
+    title: "1st Prize - Nexus AI Hackathon",
+    year: "2026",
+    desc: "Spearheaded an AI-driven project that secured the top position among 50+ competing teams. Focused on real-world problem solving using LLMs and GSAP animations.",
+    image: "/images/readme.png",
+    tags: ["AI", "Innovation", "GSAP"]
+  },
+  {
+    title: "Software Engineer Offer",
+    year: "2026",
+    desc: "Secured a professional contract offer from Infrocreon as a Software Engineer during my 4th semester, a testament to my industry-ready skills and technical depth.",
+    image: "/images/readme-bottom.png",
+    tags: ["Career", "Frontend", "Backend"]
+  }
+];
+
 export {
   words,
   abilities,
@@ -341,4 +413,6 @@ export {
   techStackImgs,
   navLinks,
   socialLinks,
+  milestones,
+  achievements,
 };
