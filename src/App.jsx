@@ -4,6 +4,7 @@ import ShowcaseSection from "./sections/ShowcaseSection";
 import NavBar from "./components/NavBar";
 
 import Languages from "./sections/Languages";
+import Career from "./sections/Career";
 import Footer from "./sections/Footer";
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
       <NavBar />
       <Hero />
       <Languages />
+      <Career />
       <ShowcaseSection />
       <Footer />
     </>
