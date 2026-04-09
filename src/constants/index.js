@@ -1,4 +1,12 @@
-import { FaDiscord, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { 
+  FaDiscord, FaGithub, FaInstagram, FaLinkedin, FaJava 
+} from "react-icons/fa";
+import { 
+  SiNextdotjs, SiMongodb, SiTailwindcss, SiJavascript, 
+  SiFlask, SiPython, SiC, SiCplusplus, SiTypescript,
+  SiHtml5, SiCss3, SiExpress, SiFastapi, SiPostgresql,
+  SiPrisma, SiGooglecloud, SiDocker, SiAmazonwebservices
+} from "react-icons/si";
 
 const navLinks = [
   {
@@ -71,39 +79,70 @@ const logoIconsList = [
 
 export const works = [
   {
+    id: 1,
     title: "Hostel Room Allotment System",
-    desc: "An admin-only room allotment system built using Java Swing and SQLite for smart hostel room assignments.",
+    category: "Desktop Application",
+    desc: "A smart room allotment system for institutional hostels.",
+    problemStatement: "Manual room allotment is prone to errors, bias, and inefficiency, especially in institutions with hundreds of students.",
+    detailedSolution: "Built a Swing-based admin dashboard that auto-assigns rooms based on student criteria, managing a secure SQLite database for persistence.",
+    techStack: [
+      { name: "Java", icon: FaJava, color: "#f8981d" },
+      { name: "SQLite", icon: SiJavascript, color: "#003b57" },
+    ],
     imagePath: "/images/project1.png",
     githubUrl: "https://github.com/athulcoder/hostel-room-allotment-system",
     previewUrl: "",
+    featured: true,
   },
   {
+    id: 2,
     title: "DailyDone",
-    desc: "A full-stack task management system built with Next.js 15, MongoDB, and JWT authentication for secure, personalized productivity tracking.",
+    category: "Full Stack",
+    desc: "Personalized task management with secure, encrypted tracking.",
+    problemStatement: "Most task managers are either overly complex or compromise on security for personal data tracking.",
+    detailedSolution: "Developed a focused Next.js app with MongoDB, implementing JWT and encrypted sessions to provide a secure 'Daily Focus' experience.",
+    techStack: [
+      { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+      { name: "MongoDB", icon: SiMongodb, color: "#47a248" },
+      { name: "Tailwind", icon: SiTailwindcss, color: "#06b6d4" },
+    ],
     imagePath: "/images/project2.png",
     githubUrl: "https://github.com/athulcoder/dailydone",
     previewUrl: "https://dailydone-alpha.vercel.app",
+    featured: false,
   },
-  // {
-  //   title: "Instagram Clone",
-  //   desc: "A mobile app clone of Instagram built with Flutter and Firebase for real-time data sync and authentication.",
-  //   imagePath: "/projects/",
-  //   githubUrl: "https://github.com/athulcoder/instagram-clone",
-  //   previewUrl: "",
-  // },
   {
+    id: 3,
     title: "CineQuest",
-    desc: "A movie discovery platform using Vanilla JS and the TMDB API, displaying ratings, trailers, and stats with a clean UI.",
+    category: "Frontend",
+    desc: "A cinematic movie discovery platform powered by TMDB API.",
+    problemStatement: "Finding movie trailers and statistics across different platforms is fragmented and slow for casual viewers.",
+    detailedSolution: "Crafted a high-performance Vanilla JS application using the TMDB API to fetch instant trailers, ratings, and stats with a clean UX.",
+    techStack: [
+      { name: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
+      { name: "HTML5", icon: SiHtml5, color: "#e34f26" },
+      { name: "CSS3", icon: SiCss3, color: "#1572b6" },
+    ],
     imagePath: "/images/project3.png",
     githubUrl: "https://github.com/athulcoder/cinequest",
     previewUrl: "https://athulcoder.github.io/cinequest",
+    featured: true,
   },
   {
+    id: 4,
     title: "C to PDF Converter",
-    desc: "A Flask web app hosted on Render, converting raw C files into formatted printable PDFs for lab submissions using WebSockets. Widely used by students across departments.",
+    category: "Web Utility",
+    desc: "Automated lab record generator used university-wide.",
+    problemStatement: "Students struggle to format raw C code correctly for printable lab records on short deadlines.",
+    detailedSolution: "Created a Flask utility that parses .c files and generates professional PDFs, using WebSockets for real-time status updates.",
+    techStack: [
+      { name: "Flask", icon: SiFlask, color: "#ffffff" },
+      { name: "Python", icon: SiPython, color: "#3776ab" },
+    ],
     imagePath: "/images/project5.png",
     githubUrl: "https://github.com/athulcoder/c_to_pdf",
     previewUrl: "https://c-to-pdf.onrender.com",
+    featured: false,
   },
 ];
 
