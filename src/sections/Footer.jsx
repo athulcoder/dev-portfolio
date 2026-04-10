@@ -26,7 +26,7 @@ const Footer = () => {
       {/* NAVIGATION — 🔥 Centered on mobile, row on larger screens */}
       <ul className="flex flex-wrap justify-center gap-6 text-gray-300 text-sm mb-10">
         {navLinks.map((item) => (
-          <li key={item}>
+          <li key={item.name}>
             <a
               href={item.link}
               className="hover:text-white transition duration-300"
@@ -38,7 +38,7 @@ const Footer = () => {
       </ul>
 
       {/* DIVIDER */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-6"></div>
+      <div className="w-full h-px bg-linear-to-r from-transparent via-white/20 to-transparent mb-6"></div>
 
       {/* COPYRIGHT */}
       <p className="text-center text-gray-400 text-sm tracking-wide">

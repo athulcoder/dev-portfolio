@@ -1,11 +1,11 @@
-import { 
-  FaDiscord, FaGithub, FaInstagram, FaLinkedin, FaJava 
+import {
+  FaDiscord, FaGithub, FaInstagram, FaLinkedin, FaJava
 } from "react-icons/fa";
-import { 
-  SiNextdotjs, SiMongodb, SiTailwindcss, SiJavascript, 
+import {
+  SiNextdotjs, SiMongodb, SiTailwindcss, SiJavascript,
   SiFlask, SiPython, SiC, SiCplusplus, SiTypescript,
   SiHtml5, SiCss3, SiExpress, SiFastapi, SiPostgresql,
-  SiPrisma, SiGooglecloud, SiDocker, SiAmazonwebservices
+  SiPrisma, SiGooglecloud, SiDocker, SiAmazonwebservices, SiTensorflow, SiOpenai
 } from "react-icons/si";
 
 const navLinks = [
@@ -78,6 +78,43 @@ const logoIconsList = [
 ];
 
 export const works = [
+
+  {
+    id: 5,
+    title: "MITS PRINT",
+    category: "Full Stack System",
+    desc: "Automated campus printing platform eliminating queues and manual handling.",
+    problemStatement: "Students face long queues and inefficiencies during lab submissions and semester deadlines in campus printing stores.",
+    detailedSolution: "Developed a full-stack automated printing system where users upload documents, pay online, and receive printed output without manual interaction. Built using Next.js API routes with PostgreSQL (Prisma), integrated Google Cloud Storage for file handling, and a Python-based print agent running on a dedicated printer PC to process queued jobs.",
+    techStack: [
+      { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+      { name: "Prisma", icon: SiPrisma, color: "#2d3748" },
+      { name: "Python", icon: SiPython, color: "#3776ab" },
+      { name: "GCP", icon: SiGooglecloud, color: "#4285f4" }
+    ],
+    imagePath: "/images/mitsprint.png",
+    githubUrl: "https://github.com/athulcoder/mits-print",
+    previewUrl: "https://mitsprint.vercel.app",
+    featured: true,
+  },
+  {
+    id: 6,
+    title: "CampusForge Engine",
+    category: "AI / Backend System",
+    desc: "Resume analyzer that matches candidates to job roles based on skills.",
+    problemStatement: "Shortlisting candidates manually during campus placements is time-consuming and often inconsistent.",
+    detailedSolution: "Built an intelligent backend engine that analyzes resumes, extracts skills, and matches candidates to suitable job roles. Designed to automate shortlisting in campus placement drives, improving efficiency and accuracy in candidate selection.",
+    techStack: [
+      { name: "Python", icon: SiPython, color: "#3776ab" },
+      { name: "Machine Learning", icon: SiTensorflow, color: "#ff6f00" },
+      { name: "NLP", icon: SiOpenai, color: "#10a37f" }
+    ],
+    imagePath: "/images/campusforge-engine.png",
+    githubUrl: "https://github.com/athulcoder/campusforge-engine",
+    previewUrl: "",
+    featured: true,
+  },
   {
     id: 1,
     title: "Hostel Room Allotment System",
@@ -144,6 +181,8 @@ export const works = [
     previewUrl: "https://c-to-pdf.onrender.com",
     featured: false,
   },
+
+
 ];
 
 const abilities = [

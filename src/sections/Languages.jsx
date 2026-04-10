@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { 
   SiPython, SiJavascript, SiCplusplus, SiC, SiHtml5, SiCss3, 
   SiTailwindcss, SiReact, SiNextdotjs, SiNodedotjs, SiExpress, 
@@ -8,178 +10,156 @@ import {
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const skillCategories = [
   {
-    title: "Core Languages",
+    title: "Core",
     skills: [
       { name: "Java", icon: FaJava, color: "#f8981d" },
       { name: "Python", icon: SiPython, color: "#3776ab" },
       { name: "C++", icon: SiCplusplus, color: "#00599c" },
-      { name: "C", icon: SiC, color: "#a8b9cc" },
       { name: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
     ]
   },
   {
-    title: "Frontend Stack",
+    title: "Frontend",
     skills: [
-      { name: "HTML5", icon: SiHtml5, color: "#e34f26" },
-      { name: "CSS3", icon: SiCss3, color: "#1572b6" },
-      { name: "Tailwind", icon: SiTailwindcss, color: "#06b6d4" },
       { name: "React", icon: SiReact, color: "#61dafb" },
       { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+      { name: "Tailwind", icon: SiTailwindcss, color: "#06b6d4" },
     ]
   },
   {
-    title: "Backend Stack",
+    title: "Backend",
     skills: [
       { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-      { name: "Express", icon: SiExpress, color: "#ffffff" },
-      { name: "Flask", icon: SiFlask, color: "#ffffff" },
       { name: "FastAPI", icon: SiFastapi, color: "#05998b" },
       { name: "MongoDB", icon: SiMongodb, color: "#47a248" },
-      { name: "PostgreSQL", icon: SiPostgresql, color: "#4169e1" },
       { name: "Prisma", icon: SiPrisma, color: "#2d3748" },
-      { name: "GCS", icon: SiGooglecloud, color: "#4285f4" },
     ]
   },
   {
-    title: "DevOps & Cloud",
+    title: "Cloud",
     skills: [
       { name: "Docker", icon: SiDocker, color: "#2496ed" },
       { name: "AWS", icon: SiAmazonwebservices, color: "#ff9900" },
-      { name: "Google Cloud", icon: SiGooglecloud, color: "#4285f4" },
+      { name: "GCP", icon: SiGooglecloud, color: "#4285f4" },
     ]
   }
 ];
 
-const SkillNode = ({ skill, index, categoryIndex }) => {
+const SkillCard = ({ skill }) => {
   const Icon = skill.icon;
+  const cardRef = useRef(null);
+  const glintRef = useRef(null);
+
+  const onMouseMove = (e) => {
+    const { left, top, width, height } = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    
+    gsap.to(glintRef.current, {
+      opacity: 1,
+      background: `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.15) 0%, transparent 80%)`,
+      duration: 0.3
+    });
+  };
+
+  const onMouseLeave = () => {
+    gsap.to(glintRef.current, { opacity: 0, duration: 0.5 });
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay: (categoryIndex * 0.2) + (index * 0.1), duration: 0.5 }}
-      whileHover={{ scale: 1.1, rotate: 5 }}
-      className="relative group p-4 flex flex-col items-center justify-center"
+    <div 
+      ref={cardRef}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="skill-card relative group p-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl transition-all duration-500 hover:border-white/30 hover:scale-[1.02] cursor-default overflow-hidden"
     >
-      <div 
-        className="w-16 h-16 md:w-20 md:h-20 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl flex items-center justify-center shadow-xl group-hover:border-white/30 transition-all duration-300"
-        style={{ boxShadow: `0 0 20px ${skill.color}20` }}
-      >
-        <Icon 
-          className="text-3xl md:text-4xl transition-colors duration-300" 
-          style={{ color: skill.color }} 
-        />
+      <div ref={glintRef} className="absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-300" />
+      <div className="relative z-10 flex items-center gap-4">
+        <div 
+          className="p-3 rounded-xl bg-black/40 border border-white/5 flex items-center justify-center shadow-inner"
+          style={{ boxShadow: `0 0 15px ${skill.color}15` }}
+        >
+          <Icon className="text-2xl" style={{ color: skill.color }} />
+        </div>
+        <div>
+          <h4 className="text-white text-sm font-semibold tracking-wide">{skill.name}</h4>
+          <div className="w-12 h-1 bg-white/5 mt-1 rounded-full overflow-hidden">
+             <div className="h-full bg-linear-to-r from-transparent to-white/20 animate-light-move" />
+          </div>
+        </div>
       </div>
-      <span className="mt-2 text-xs md:text-sm font-medium text-gray-400 group-hover:text-white transition-colors duration-300">
-        {skill.name}
-      </span>
-    </motion.div>
+    </div>
   );
 };
 
 const Languages = () => {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
 
-  const pathLength = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  useGSAP(() => {
+    gsap.fromTo(".skill-card", 
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.05,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%",
+        }
+      }
+    );
+
+    gsap.fromTo(".skill-title", 
+       { opacity: 0, x: -20 },
+       {
+         opacity: 1,
+         x: 0,
+         duration: 1,
+         scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+         }
+       }
+    );
+  }, { scope: containerRef });
 
   return (
     <section 
       ref={containerRef}
-      className="w-full py-24 bg-black relative overflow-hidden" 
+      className="w-full py-32 bg-black relative overflow-hidden" 
       id="skill"
     >
-      {/* Background Glows */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background Orbs */}
+      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-emerald-600/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <header className="mb-20 text-center md:text-left">
-          <motion.h2 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-bold text-white mb-4"
-          >
-            Pathway <span className="text-gray-500">of Mastery</span>
-          </motion.h2>
-          <motion.div 
-            initial={{ width: 0 }}
-            whileInView={{ width: "100px" }}
-            viewport={{ once: true }}
-            className="h-1.5 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full mx-auto md:mx-0"
-          />
+        <header className="mb-16">
+          <h2 className="skill-title text-4xl md:text-6xl font-bold text-white mb-2 tracking-tight">
+            The <span className="text-gray-500">Tech Stack</span>
+          </h2>
+          <p className="text-gray-400 text-lg md:text-xl font-light">A curated list of tools I use to build robust applications.</p>
         </header>
 
-        <div className="relative">
-          {/* SVG Connector Path - Desktop */}
-          <div className="hidden lg:block absolute inset-0 pointer-events-none translate-y-12">
-            <svg 
-              width="100%" 
-              height="100%" 
-              viewBox="0 0 1200 1000" 
-              fill="none" 
-              className="opacity-20"
-            >
-              {/* Main Winding Path */}
-              <motion.path
-                d="M50,100 H1150 Q1200,100 1200,150 V200 Q1200,250 1150,250 H50 Q0,250 0,300 V350 Q0,400 50,400 H1150 Q1200,400 1200,450 V500 Q1200,550 1150,550 H50"
-                stroke="white"
-                strokeWidth="2"
-                strokeDasharray="8 8"
-                style={{ pathLength }}
-              />
-            </svg>
-          </div>
-
-          <div className="space-y-16 lg:space-y-32">
-            {skillCategories.map((category, catIdx) => (
-              <div key={catIdx} className="relative">
-                <motion.h3 
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  className="text-xl md:text-2xl font-semibold text-gray-400 mb-8 flex items-center gap-4"
-                >
-                  <span className="w-8 h-px bg-gray-700" />
-                  {category.title}
-                  <span className="flex-1 h-px bg-gray-700/30" />
-                </motion.h3>
-
-                <div className={`grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-8 gap-6 md:gap-10`}>
-                  {category.skills.map((skill, idx) => (
-                    <SkillNode 
-                      key={idx} 
-                      skill={skill} 
-                      index={idx} 
-                      categoryIndex={catIdx} 
-                    />
-                  ))}
-                </div>
-
-                {/* Vertical Connector for Mobile */}
-                {catIdx < skillCategories.length - 1 && (
-                  <div className="lg:hidden flex justify-center py-8">
-                    <motion.div 
-                      initial={{ height: 0 }}
-                      whileInView={{ height: "4rem" }}
-                      viewport={{ once: true }}
-                      className="w-0.5 border-r-2 border-dashed border-gray-800"
-                    />
-                  </div>
-                )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {skillCategories.map((category, catIdx) => (
+            <div key={catIdx} className="space-y-6">
+              <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-gray-500 pl-2 border-l-2 border-emerald-500/50">
+                {category.title}
+              </h3>
+              <div className="grid grid-cols-1 gap-4">
+                {category.skills.map((skill, idx) => (
+                  <SkillCard key={idx} skill={skill} />
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -187,4 +167,3 @@ const Languages = () => {
 };
 
 export default Languages;
-
