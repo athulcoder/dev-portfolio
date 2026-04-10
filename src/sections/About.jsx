@@ -145,7 +145,7 @@ const About = () => {
               <img
                 src="/athulcoder-top.jpg"
                 alt="Athul Sabu"
-                className="w-full h-full object-contain relative z-10 filter drop-shadow-[0_0_20px_rgba(131,156,181,0.3)] rounded-full"
+                className="w-full h-full object-contain relative z-10 filter drop-shadow-[0_0_20px_rgba(131,156,181,0.3)] rounded-3xl"
               />
             </div>
           </div>
