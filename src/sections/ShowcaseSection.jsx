@@ -12,28 +12,34 @@ const ShowcaseSection = () => {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    gsap.from(".work-card", {
-      opacity: 0,
-      scale: 0.95,
-      y: 40,
-      stagger: 0.1,
-      duration: 1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".work-grid",
-        start: "top 80%",
+    gsap.fromTo(".work-card", 
+      { opacity: 0, scale: 0.95, y: 40 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".work-grid",
+          start: "top 80%",
+        }
       }
-    });
+    );
 
-    gsap.from(".section-title h2", {
-      opacity: 0,
-      y: 20,
-      duration: 1,
-      scrollTrigger: {
-        trigger: ".section-title",
-        start: "top 85%",
+    gsap.fromTo(".section-title h2", 
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".section-title",
+          start: "top 85%",
+        }
       }
-    });
+    );
   }, { scope: containerRef });
 
   const openModal = (work) => {
@@ -157,9 +163,9 @@ const ShowcaseSection = () => {
             className="modal-overlay absolute inset-0 bg-black/95 backdrop-blur-2xl"
           />
 
-          <div className="modal-content relative w-full max-w-6xl max-h-[90vh] overflow-hidden bg-[#0d0d0d] border border-white/10 rounded-[3.5rem] shadow-[0_0_100px_rgba(0,0,0,0.8)] flex flex-col md:flex-row z-101">
+          <div className="modal-content relative w-full max-w-6xl h-[90vh] overflow-hidden bg-[#0d0d0d] border border-white/10 rounded-[3.5rem] shadow-[0_0_100px_rgba(0,0,0,0.8)] flex flex-col md:flex-row z-101">
             {/* Modal Visual Area */}
-            <div className="w-full md:w-[45%] relative bg-black/40 overflow-hidden border-b md:border-b-0 md:border-r border-white/10">
+            <div className="w-full md:w-[45%] h-[40%] md:h-full relative bg-black/40 overflow-hidden border-b md:border-b-0 md:border-r border-white/10 shrink-0">
               <img
                 src={selectedProject.imagePath}
                 alt={selectedProject.title}
@@ -175,7 +181,10 @@ const ShowcaseSection = () => {
             </div>
 
             {/* Modal Content area */}
-            <div className="w-full md:w-[55%] p-10 md:p-16 overflow-y-auto bg-linear-to-br from-[#0d0d0d] to-black custom-scrollbar font-outfit">
+            <div 
+              data-lenis-prevent="true"
+              className="w-full md:w-[55%] p-10 md:p-16 overflow-y-auto bg-linear-to-br from-[#0d0d0d] to-black custom-scrollbar font-outfit"
+            >
               <div className="flex justify-between items-start mb-12">
                 <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight uppercase">
                   {selectedProject.title}
