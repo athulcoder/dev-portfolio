@@ -1,5 +1,6 @@
 import React from "react";
 import Hero from "./sections/Hero";
+import About from "./sections/About";
 import ShowcaseSection from "./sections/ShowcaseSection";
 import NavBar from "./components/NavBar";
 
@@ -12,6 +13,7 @@ const App = () => {
     <>
       <NavBar />
       <Hero />
+      <About />
       <Languages />
       <Career />
       <ShowcaseSection />
