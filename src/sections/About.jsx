@@ -118,7 +118,7 @@ const About = () => {
                   />
                   <TerminalLine
                     command="ls skills/"
-                    response="React.js, Node.js, GSAP, TailwindCSS, Three.js, Python, Git, Docker"
+                    response="React.js, Node.js, Express.js, Flask, GSAP, TailwindCSS, Next.js, Python, Git, Docker,GCP,AWS,Vercel"
                     delay={2.5}
                   />
                   <TerminalLine
