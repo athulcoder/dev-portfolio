@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,16 +10,21 @@ gsap.registerPlugin(ScrollTrigger);
 const ShowcaseSection = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+  }, []);
 
   useGSAP(() => {
     gsap.fromTo(".work-card", 
-      { opacity: 0, scale: 0.95, y: 40 },
+      { opacity: 0, scale: 0.95, y: isMobile ? 20 : 40 },
       {
         opacity: 1,
         scale: 1,
         y: 0,
-        stagger: 0.1,
-        duration: 1,
+        stagger: isMobile ? 0.05 : 0.1,
+        duration: isMobile ? 0.6 : 1,
         ease: "power2.out",
         scrollTrigger: {
           trigger: ".work-grid",
@@ -40,7 +45,7 @@ const ShowcaseSection = () => {
         }
       }
     );
-  }, { scope: containerRef });
+  }, { scope: containerRef, dependencies: [isMobile] });
 
   const openModal = (work) => {
     setSelectedProject(work);
@@ -87,7 +92,7 @@ const ShowcaseSection = () => {
             <a
               href="https://github.com/athulcoder"
               target="_blank"
-              className="group flex items-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all duration-300 backdrop-blur-md"
+              className="group flex items-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all duration-300"
             >
               <Github className="w-5 h-5 text-white" />
               <span className="text-white font-medium uppercase text-xs tracking-[2px]">Explore Archive</span>
@@ -101,7 +106,7 @@ const ShowcaseSection = () => {
             <div
               key={work.id}
               onClick={() => openModal(work)}
-              className={`work-card group relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 cursor-pointer backdrop-blur-sm transition-all duration-500 hover:border-emerald-500/30 shadow-2xl ${work.featured ? "md:col-span-2 lg:row-span-2" : ""
+              className={`work-card group relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 cursor-pointer transition-all duration-500 hover:border-emerald-500/30 shadow-2xl ${work.featured ? "md:col-span-2 lg:row-span-2" : ""
                 }`}
             >
               {/* Project Image */}
@@ -109,6 +114,7 @@ const ShowcaseSection = () => {
                 <img
                   src={work.imagePath}
                   alt={work.title}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-40 group-hover:opacity-60"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent" />
@@ -116,7 +122,7 @@ const ShowcaseSection = () => {
 
               {/* Card Header Tag */}
               <div className="absolute top-8 left-8 z-10">
-                <span className="px-5 py-2 bg-white/10 backdrop-blur-xl border border-white/10 inline-block rounded-full text-[10px] font-bold text-emerald-400 uppercase tracking-[3px]">
+                <span className="px-5 py-2 bg-white/10 border border-white/10 inline-block rounded-full text-[10px] font-bold text-emerald-400 uppercase tracking-[3px]">
                   {work.category}
                 </span>
               </div>
@@ -131,7 +137,7 @@ const ShowcaseSection = () => {
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <div className="px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full text-xs font-bold text-white uppercase tracking-[2px] transition-colors duration-300 backdrop-blur-md">
+                  <div className="px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full text-xs font-bold text-white uppercase tracking-[2px] transition-colors duration-300">
                     View Project <Zap className="inline-block w-3 h-3 ml-2" />
                   </div>
                 </div>
@@ -160,21 +166,22 @@ const ShowcaseSection = () => {
         <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
           <div
             onClick={closeModal}
-            className="modal-overlay absolute inset-0 bg-black/95 backdrop-blur-2xl"
+            className="modal-overlay absolute inset-0 bg-black/95"
           />
 
-          <div className="modal-content relative w-full max-w-6xl h-[90vh] overflow-hidden bg-[#0d0d0d] border border-white/10 rounded-[3.5rem] shadow-[0_0_100px_rgba(0,0,0,0.8)] flex flex-col md:flex-row z-101">
+          <div className="modal-content relative w-full max-w-6xl h-[90vh] overflow-hidden bg-[#0d0d0d] border border-white/10 rounded-[2rem] md:rounded-[3.5rem] shadow-[0_0_100px_rgba(0,0,0,0.8)] flex flex-col md:flex-row z-101">
             {/* Modal Visual Area */}
             <div className="w-full md:w-[45%] h-[40%] md:h-full relative bg-black/40 overflow-hidden border-b md:border-b-0 md:border-r border-white/10 shrink-0">
               <img
                 src={selectedProject.imagePath}
                 alt={selectedProject.title}
+                loading="lazy"
                 className="w-full h-full object-cover opacity-70"
               />
               <div className="absolute inset-0 bg-linear-to-t from-[#0d0d0d] via-transparent to-transparent" />
 
-              <div className="absolute top-12 left-12">
-                <span className="px-8 py-3 bg-emerald-500/20 backdrop-blur-2xl border border-emerald-500/40 rounded-full text-emerald-400 text-[10px] font-bold uppercase tracking-[4px]">
+              <div className="absolute top-6 left-6 md:top-12 md:left-12">
+                <span className="px-6 py-2 md:px-8 md:py-3 bg-emerald-500/20 border border-emerald-500/40 rounded-full text-emerald-400 text-[10px] font-bold uppercase tracking-[4px]">
                   {selectedProject.category}
                 </span>
               </div>
@@ -183,10 +190,10 @@ const ShowcaseSection = () => {
             {/* Modal Content area */}
             <div 
               data-lenis-prevent="true"
-              className="w-full md:w-[55%] p-10 md:p-16 overflow-y-auto bg-linear-to-br from-[#0d0d0d] to-black custom-scrollbar font-outfit"
+              className="w-full md:w-[55%] p-8 md:p-16 overflow-y-auto bg-linear-to-br from-[#0d0d0d] to-black custom-scrollbar font-outfit"
             >
               <div className="flex justify-between items-start mb-12">
-                <h2 className="text-4xl md:text-6xl font-bold text-white leading-tight uppercase">
+                <h2 className="text-3xl md:text-6xl font-bold text-white leading-tight uppercase">
                   {selectedProject.title}
                 </h2>
                 <button

@@ -1,11 +1,20 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 const MagneticCursor = () => {
     const cursorRef = useRef(null);
     const followerRef = useRef(null);
+    const [isTouchDevice, setIsTouchDevice] = useState(true);
 
     useEffect(() => {
+        // Detect touch/coarse pointer devices — no custom cursor needed
+        const isTouch = window.matchMedia("(pointer: coarse)").matches || 
+                        window.matchMedia("(max-width: 768px)").matches ||
+                        "ontouchstart" in window;
+        setIsTouchDevice(isTouch);
+
+        if (isTouch) return;
+
         const cursor = cursorRef.current;
         const follower = followerRef.current;
 
@@ -56,6 +65,9 @@ const MagneticCursor = () => {
             });
         };
     }, []);
+
+    // Don't render anything on touch devices
+    if (isTouchDevice) return null;
 
     return (
         <>

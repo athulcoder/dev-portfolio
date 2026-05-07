@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -48,13 +48,18 @@ const About = () => {
   const sectionRef = useRef(null);
   const terminalRef = useRef(null);
   const imageRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+  }, []);
 
   useGSAP(() => {
     // Entrance animation for terminal
     gsap.from(terminalRef.current, {
-      x: -100,
+      x: isMobile ? -30 : -100,
       opacity: 0,
-      duration: 1.5,
+      duration: isMobile ? 0.8 : 1.5,
       ease: "power3.out",
       scrollTrigger: {
         trigger: terminalRef.current,
@@ -64,9 +69,9 @@ const About = () => {
 
     // Entrance animation for image
     gsap.from(imageRef.current, {
-      x: 100,
+      x: isMobile ? 30 : 100,
       opacity: 0,
-      duration: 1.5,
+      duration: isMobile ? 0.8 : 1.5,
       ease: "power3.out",
       scrollTrigger: {
         trigger: imageRef.current,
@@ -74,15 +79,17 @@ const About = () => {
       },
     });
 
-    // Floating animation for image
-    gsap.to(imageRef.current, {
-      y: 20,
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    });
-  }, { scope: sectionRef });
+    // Floating animation for image — ONLY on desktop (infinite animation kills mobile perf)
+    if (!isMobile) {
+      gsap.to(imageRef.current, {
+        y: 20,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    }
+  }, { scope: sectionRef, dependencies: [isMobile] });
 
   return (
     <section id="about" ref={sectionRef} className="section-padding bg-black-100 min-h-screen flex items-center overflow-hidden">
@@ -145,6 +152,7 @@ const About = () => {
               <img
                 src="/athulcoder-top.jpg"
                 alt="Athul Sabu"
+                loading="lazy"
                 className="w-full h-full object-contain relative z-10 filter drop-shadow-[0_0_20px_rgba(131,156,181,0.3)] rounded-3xl"
               />
             </div>

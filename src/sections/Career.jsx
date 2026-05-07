@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -58,29 +58,52 @@ const Career = () => {
   const containerRef = useRef(null);
   const timelineRef = useRef(null);
   const progressionRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+  }, []);
 
   useGSAP(() => {
     // Timeline progression animation
-    gsap.fromTo(progressionRef.current, 
-      { scaleY: 0 },
-      { 
-        scaleY: 1, 
-        ease: "none",
-        scrollTrigger: {
-          trigger: timelineRef.current,
-          start: "top 20%",
-          end: "bottom 80%",
-          scrub: 1,
+    if (!isMobile) {
+      // Scrub-based animation — desktop only (scrub causes constant recalc on mobile scroll)
+      gsap.fromTo(progressionRef.current, 
+        { scaleY: 0 },
+        { 
+          scaleY: 1, 
+          ease: "none",
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: "top 20%",
+            end: "bottom 80%",
+            scrub: 1,
+          }
         }
-      }
-    );
+      );
+    } else {
+      // Simple trigger-based reveal on mobile
+      gsap.fromTo(progressionRef.current, 
+        { scaleY: 0 },
+        { 
+          scaleY: 1, 
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: timelineRef.current,
+            start: "top 50%",
+          }
+        }
+      );
+    }
 
     // Staggered reveal for cards
     gsap.from(".career-card", {
       opacity: 0,
-      x: (index) => (index % 2 === 0 ? 50 : -50),
-      duration: 1.2,
-      stagger: 0.2,
+      x: isMobile ? 0 : (index) => (index % 2 === 0 ? 50 : -50),
+      y: isMobile ? 30 : 0,
+      duration: isMobile ? 0.6 : 1.2,
+      stagger: isMobile ? 0.1 : 0.2,
       ease: "power2.out",
       scrollTrigger: {
         trigger: ".career-cards-container",
@@ -91,14 +114,14 @@ const Career = () => {
     // Node scale animation
     gsap.from(".timeline-node", {
       scale: 0,
-      duration: 0.8,
-      stagger: 0.2,
+      duration: isMobile ? 0.5 : 0.8,
+      stagger: isMobile ? 0.1 : 0.2,
       scrollTrigger: {
         trigger: ".career-cards-container",
         start: "top 70%",
       }
     });
-  }, { scope: containerRef });
+  }, { scope: containerRef, dependencies: [isMobile] });
 
   return (
     <section
@@ -155,10 +178,10 @@ const Career = () => {
 
                   {/* Card Side */}
                   <div className="career-card w-[calc(100%-80px)] md:w-[45%] ml-auto md:ml-0">
-                    <div className="group relative bg-white/3 backdrop-blur-3xl border border-white/5 p-10 rounded-[3rem] hover:border-white/20 transition-all duration-700 shadow-2xl">
+                    <div className="group relative bg-white/3 border border-white/5 p-10 rounded-[3rem] hover:border-white/20 transition-all duration-700 shadow-2xl">
                       {/* Company Image/Logo Placeholder */}
                       <div className="absolute -right-6 -top-6 w-32 h-32 opacity-5 group-hover:opacity-20 transition-all duration-700 grayscale pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <img src={item.image} alt="logo" className="w-full h-full object-contain" />
+                        <img src={item.image} alt="logo" loading="lazy" className="w-full h-full object-contain" />
                       </div>
 
                       <div className="relative z-10">

@@ -657,3 +657,69 @@ section {
 .animate-light-move {
   animation: lightMove 2s ease-in-out infinite;
 }
+
+/* ========================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+@media (max-width: 768px) {
+  /* Disable expensive backdrop-blur on mobile GPUs */
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Stop infinite word slider animation */
+  .wrapper {
+    animation: none !important;
+  }
+
+  /* Disable expensive conic-gradient card mask */
+  .card::before {
+    display: none !important;
+  }
+
+  .glow {
+    display: none !important;
+  }
+
+  /* Disable infinite icon/glow animations */
+  .animate-dash-glow {
+    animation: none !important;
+  }
+
+  .animate-icon-glow {
+    animation: none !important;
+  }
+
+  .animate-light-move {
+    animation: none !important;
+  }
+
+  /* Reduce marquee animation complexity */
+  .marquee-box {
+    animation-duration: 120s !important;
+  }
+
+  /* Simplify gradient edges */
+  .gradient-edge {
+    display: none !important;
+  }
+
+  /* GPU compositing hints for animated elements */
+  .hero-text h1,
+  .work-card,
+  .skill-card,
+  .career-card {
+    will-change: transform, opacity;
+  }
+
+  /* Reduce blur on decorative background orbs */
+  [class*="blur-[1"] {
+    filter: blur(60px) !important;
+  }
+}

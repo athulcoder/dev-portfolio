@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -49,12 +49,14 @@ const skillCategories = [
   }
 ];
 
-const SkillCard = ({ skill }) => {
+const SkillCard = ({ skill, isMobile }) => {
   const Icon = skill.icon;
   const cardRef = useRef(null);
   const glintRef = useRef(null);
 
+  // Mouse-follow glint effect — desktop only (useless on touch)
   const onMouseMove = (e) => {
+    if (isMobile) return;
     const { left, top, width, height } = cardRef.current.getBoundingClientRect();
     const x = ((e.clientX - left) / width) * 100;
     const y = ((e.clientY - top) / height) * 100;
@@ -67,6 +69,7 @@ const SkillCard = ({ skill }) => {
   };
 
   const onMouseLeave = () => {
+    if (isMobile) return;
     gsap.to(glintRef.current, { opacity: 0, duration: 0.5 });
   };
 
@@ -75,9 +78,11 @@ const SkillCard = ({ skill }) => {
       ref={cardRef}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="skill-card relative group p-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl transition-all duration-500 hover:border-white/30 hover:scale-[1.02] cursor-default overflow-hidden"
+      className="skill-card relative group p-5 bg-white/5 border border-white/10 rounded-2xl transition-all duration-500 hover:border-white/30 hover:scale-[1.02] cursor-default overflow-hidden"
     >
-      <div ref={glintRef} className="absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-300" />
+      {!isMobile && (
+        <div ref={glintRef} className="absolute inset-0 opacity-0 pointer-events-none transition-opacity duration-300" />
+      )}
       <div className="relative z-10 flex items-center gap-4">
         <div 
           className="p-3 rounded-xl bg-black/40 border border-white/5 flex items-center justify-center shadow-inner"
@@ -98,15 +103,20 @@ const SkillCard = ({ skill }) => {
 
 const Languages = () => {
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+  }, []);
 
   useGSAP(() => {
     gsap.fromTo(".skill-card", 
-      { opacity: 0, y: 30 },
+      { opacity: 0, y: isMobile ? 15 : 30 },
       {
         opacity: 1,
         y: 0,
-        stagger: 0.05,
-        duration: 0.8,
+        stagger: isMobile ? 0.03 : 0.05,
+        duration: isMobile ? 0.5 : 0.8,
         ease: "power3.out",
         scrollTrigger: {
           trigger: containerRef.current,
@@ -127,7 +137,7 @@ const Languages = () => {
          }
        }
     );
-  }, { scope: containerRef });
+  }, { scope: containerRef, dependencies: [isMobile] });
 
   return (
     <section 
@@ -155,7 +165,7 @@ const Languages = () => {
               </h3>
               <div className="grid grid-cols-1 gap-4">
                 {category.skills.map((skill, idx) => (
-                  <SkillCard key={idx} skill={skill} />
+                  <SkillCard key={idx} skill={skill} isMobile={isMobile} />
                 ))}
               </div>
             </div>
