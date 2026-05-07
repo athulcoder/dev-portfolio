@@ -58,22 +58,22 @@ const Hero = () => {
             <p className="text-white-50 md:text-xl relative z-999 pointer-events-none ">
               Hi, I am Athul Sabu, a developer based in India with passion for
               code.
-               
+
             </p>
-             <div className="md:w-72 md:h-16 w-60 h-12 z-999" onClick={()=>window.open('/athul_sabu_resume.pdf',"_blank")}>
-                   <div className="cta-button group bg-violet-900 hover:bg-black-200 duration-300">
-                            <p className="text-white-50">Resume</p>
-        
-                  </div>
-             </div>
+            <div className="md:w-72 md:h-16 w-60 h-12 z-999" onClick={() => window.open('/ATHUL_SABU_RESUME.pdf', "_blank")}>
+              <div className="cta-button group bg-violet-900 hover:bg-black-200 duration-300">
+                <p className="text-white-50">Resume</p>
+
+              </div>
+            </div>
             <Button
               className="md:w-72 md:h-16 w-60 h-12"
               id="button"
               text="See my Work"
             />
 
-           
-           
+
+
           </div>
         </header>
 

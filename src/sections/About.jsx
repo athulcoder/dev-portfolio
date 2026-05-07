@@ -135,7 +135,7 @@ const About = () => {
               </div>
             </div>
           </div>
-
+          
           {/* RIGHT: IMAGE */}
           <div className="lg:col-span-5 flex justify-center relative" ref={imageRef}>
             <div className="relative w-full max-w-md aspect-[4/5]">
