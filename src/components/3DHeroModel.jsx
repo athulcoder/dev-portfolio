@@ -41,9 +41,9 @@ export function HeroCardBackground() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  if (isMobile) {
-    return <MobileHeroGrid />;
-  }
+  // if (isMobile) {
+  //   return <MobileHeroGrid />;
+  // }
 
   const images = [
     "/images/p1.png",
