@@ -120,7 +120,7 @@ const About = () => {
                 <div className="p-6 md:p-8 min-h-[300px]">
                   <TerminalLine
                     command="whoami"
-                    response="Athul Sabu | Full Stack Developer & Tech Enthusiast"
+                    response="Hi, I’m Athul Sabu, a BTech Computer Science student at Muthoot Institute of Technology and Science | Full Stack Developer & Tech Enthusiast"
                     delay={0.5}
                   />
                   <TerminalLine
@@ -142,7 +142,7 @@ const About = () => {
               </div>
             </div>
           </div>
-          
+
           {/* RIGHT: IMAGE */}
           <div className="lg:col-span-5 flex justify-center relative" ref={imageRef}>
             <div className="relative w-full max-w-md aspect-[4/5]">
