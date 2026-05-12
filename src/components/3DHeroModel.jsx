@@ -46,34 +46,34 @@ export function HeroCardBackground() {
   // }
 
   const images = [
-    "/images/p1.png",
+    "/images/new.png",
     "/images/p2.png",
     "/images/p3.png",
     "/images/p6.png",
     "/images/p2.png",
     "/images/p5.png",
 
-    "/images/p7.png",
+    "/images/new.png",
     "/images/p8.png",
-    "/images/p9.png",
+    "/images/new.png",
     "/images/p4.png",
     "/images/p5.png",
 
-    "/images/p1.png",
+    "/images/new.png",
     "/images/p2.png",
     "/images/p8.png",
-    "/images/p4.png",
+    "/images/new.png",
     "/images/p5.png",
     "/images/p6.png",
 
-    "/images/p1.png",
+    "/images/new.png",
     "/images/p6.png",
 
     "/images/p9.png",
     "/images/p4.png",
     "/images/p5.png",
     "/images/p1.png",
-    "/images/p2.png",
+    "/images/new.png",
     "/images/p3.png",
     "/images/p6.png",
   ];
