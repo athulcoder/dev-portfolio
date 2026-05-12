@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import AnimatedCounters from "../components/AnimatedCounters";
 import { HeroCardBackground } from "@/components/3DHeroModel";
 import GithubCalendarComponent from "@/components/GithubCalendar";
+import TerminalCommand from "../components/TerminalPortfolio";
 const Hero = () => {
   useGSAP(() => {
     gsap.fromTo(
@@ -88,6 +89,7 @@ const Hero = () => {
       </div>
       <AnimatedCounters />
       <GithubCalendarComponent />
+      <TerminalCommand/>
     </section>
   );
 };
