@@ -15,7 +15,7 @@ export default function GithubCalendarComponent() {
                 />
             </div>
 
-            <button className="px-4 py-2 rounded-2xl bg-white text-black  cursor-pointer hover:bg-black duration-700 hover:text-white hover:border-[1px] ">See my github</button>
+            <a href="https://github.com/athulcoder" target="_blank" className="px-4 py-2 rounded-2xl bg-white text-black  cursor-pointer hover:bg-black duration-700 hover:text-white hover:border-[1px] ">See my github</a>
         </div>
     );
 }
