@@ -34,8 +34,13 @@ export default function TerminalCommand() {
                     </button>
                 </div>
 
+                {/* Comment */}
+                <div className="px-6 pt-5 text-sm text-zinc-400 font-mono">
+                    // Run this to explore my terminal portfolio
+                </div>
+
                 {/* Command */}
-                <div className="px-6 py-8 font-mono text-lg md:text-2xl text-green-400 overflow-x-auto">
+                <div className="px-6 py-6 font-mono text-lg md:text-2xl text-green-400 overflow-x-auto">
                     <span className="text-zinc-500">$</span> {command}
                 </div>
             </div>
