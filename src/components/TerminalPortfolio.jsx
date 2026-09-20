@@ -1,15 +1,16 @@
+import { useState } from "react";
+import { IoCopyOutline } from "react-icons/io5";
+import { LuCopyCheck } from "react-icons/lu";
+
 export default function TerminalCommand() {
+    const [copied, setCopied] = useState(false);
     const command = "npx athulcoder";
 
     const copyCommand = async () => {
         await navigator.clipboard.writeText(command);
-
-        const btn = document.getElementById("copy-btn");
-
-        btn.innerText = "Copied ✓";
-
+        setCopied(true);
         setTimeout(() => {
-            btn.innerText = "Copy";
+            setCopied(false);
         }, 2000);
     };
 
@@ -26,11 +27,12 @@ export default function TerminalCommand() {
                     </div>
 
                     <button
-                        id="copy-btn"
                         onClick={copyCommand}
-                        className="text-sm px-3 py-1 rounded-lg bg-green-500 text-black font-semibold hover:bg-green-400 transition"
+                        className="text-sm px-3 py-1.5 rounded-lg bg-green-500 text-black font-semibold hover:bg-green-400 transition flex items-center gap-2"
+                        title="Copy to clipboard"
                     >
-                        Copy
+                        {copied ? <LuCopyCheck size={18} /> : <IoCopyOutline size={18} />}
+                        {copied ? "Copied" : "Copy"}
                     </button>
                 </div>
 

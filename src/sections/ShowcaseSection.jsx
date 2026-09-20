@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { works } from "@/constants";
-import { X, ExternalLink, Github, Zap, Info } from "lucide-react";
+import { X, ExternalLink, Github, Zap } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,35 +12,37 @@ const ShowcaseSection = () => {
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
 
+  const personalWorks = works.filter((w) => w.type === "personal" || !w.type);
+  const freelanceWorks = works.filter((w) => w.type === "freelance");
+
   useEffect(() => {
     setIsMobile(window.matchMedia("(max-width: 768px)").matches);
   }, []);
 
   useGSAP(() => {
     gsap.fromTo(".work-card", 
-      { opacity: 0, scale: 0.95, y: isMobile ? 20 : 40 },
+      { opacity: 0, y: isMobile ? 20 : 40 },
       {
         opacity: 1,
-        scale: 1,
         y: 0,
         stagger: isMobile ? 0.05 : 0.1,
         duration: isMobile ? 0.6 : 1,
         ease: "power2.out",
         scrollTrigger: {
-          trigger: ".work-grid",
+          trigger: containerRef.current,
           start: "top 80%",
         }
       }
     );
 
-    gsap.fromTo(".section-title h2", 
+    gsap.fromTo(".section-title", 
       { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
         duration: 1,
         scrollTrigger: {
-          trigger: ".section-title",
+          trigger: containerRef.current,
           start: "top 85%",
         }
       }
@@ -51,16 +53,16 @@ const ShowcaseSection = () => {
     setSelectedProject(work);
     gsap.fromTo(".modal-overlay", { opacity: 0 }, { opacity: 1, duration: 0.3 });
     gsap.fromTo(".modal-content",
-      { opacity: 0, scale: 0.9, y: 50 },
-      { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "power3.out", delay: 0.1 }
+      { opacity: 0, scale: 0.95, y: 30 },
+      { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "power3.out", delay: 0.1 }
     );
   };
 
   const closeModal = () => {
     gsap.to(".modal-content", {
       opacity: 0,
-      scale: 0.9,
-      y: 50,
+      scale: 0.95,
+      y: 30,
       duration: 0.3,
       ease: "power3.in",
       onComplete: () => setSelectedProject(null)
@@ -68,120 +70,127 @@ const ShowcaseSection = () => {
     gsap.to(".modal-overlay", { opacity: 0, duration: 0.3 });
   };
 
-  return (
-    <section id="work" ref={containerRef} className="py-24 bg-[#0a0a0a] relative overflow-hidden">
-      {/* Background Decorative Elements */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-500/10 blur-[120px] rounded-full" />
+  const ProjectCard = ({ work }) => (
+    <div
+      onClick={() => openModal(work)}
+      className="work-card group relative overflow-hidden rounded-3xl border border-gray-100 dark:border-white/10 bg-white dark:bg-slate-800/50 cursor-pointer transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-2 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:border-indigo-500/30 flex flex-col h-full"
+    >
+      <div className="relative h-64 overflow-hidden">
+        <img
+          src={work.imagePath}
+          alt={work.title}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute top-4 left-4">
+          <span className="px-4 py-1.5 bg-white/90 dark:bg-slate-800/80 backdrop-blur-sm border border-gray-100 dark:border-white/10 rounded-full text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest shadow-sm">
+            {work.category}
+          </span>
+        </div>
       </div>
 
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 font-outfit uppercase">
+          {work.title}
+        </h3>
+        <p className="text-gray-600 dark:text-gray-400 text-sm font-light mb-6 line-clamp-3">
+          {work.desc}
+        </p>
+
+        <div className="mt-auto">
+          <div className="inline-flex items-center text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest group-hover:text-indigo-500 transition-colors">
+            View Details <Zap className="w-3 h-3 ml-2" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <section id="work" ref={containerRef} className="py-24 bg-gray-50 dark:bg-[#0a0a0a] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="section-title flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
-            <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight font-outfit uppercase">
-              Creative <span className="text-gray-500 italic lowercase">Showcase</span>
+            <h2 className="text-4xl md:text-6xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight uppercase">
+              Creative <span className="text-indigo-600">Showcase</span>
             </h2>
-            <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
+            <p className="text-slate-600 dark:text-slate-400 text-lg md:text-xl font-medium">
               A curated collection of digital experiences, focusing on
-              <span className="text-emerald-400 font-medium"> performance, scalability, and cinematic UI</span>.
+              <span className="text-indigo-600 dark:text-indigo-400 font-bold"> performance, scalability, and clean UI</span>.
             </p>
           </div>
 
-          <div className=" md:block">
+          <div className="md:block">
             <a
               href="https://github.com/athulcoder"
               target="_blank"
-              className="group flex items-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all duration-300"
+              className="group flex items-center gap-3 px-6 py-3 bg-white dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 border border-gray-200 dark:border-white/10 rounded-full transition-all duration-300 shadow-sm"
             >
-              <Github className="w-5 h-5 text-white" />
-              <span className="text-white font-medium uppercase text-xs tracking-[2px]">Explore Archive</span>
+              <Github className="w-4 h-4 text-gray-900 dark:text-white" />
+              <span className="text-gray-900 dark:text-white font-medium uppercase text-xs tracking-widest">Explore Archive</span>
             </a>
           </div>
         </div>
 
-        {/* Bento Grid */}
-        <div className="work-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
-          {works.map((work, index) => (
-            <div
-              key={work.id}
-              onClick={() => openModal(work)}
-              className={`work-card group relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 cursor-pointer transition-all duration-500 hover:border-emerald-500/30 shadow-2xl ${work.featured ? "md:col-span-2 lg:row-span-2" : ""
-                }`}
-            >
-              {/* Project Image */}
-              <div className="absolute inset-0 z-0">
-                <img
-                  src={work.imagePath}
-                  alt={work.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-40 group-hover:opacity-60"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent" />
-              </div>
-
-              {/* Card Header Tag */}
-              <div className="absolute top-8 left-8 z-10">
-                <span className="px-5 py-2 bg-white/10 border border-white/10 inline-block rounded-full text-[10px] font-bold text-emerald-400 uppercase tracking-[3px]">
-                  {work.category}
-                </span>
-              </div>
-
-              {/* Card Content Overlay */}
-              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 z-10 flex flex-col justify-end bg-linear-to-t from-black via-black/80 to-transparent">
-                <h3 className="text-2xl md:text-4xl font-bold text-white mb-2 leading-tight font-outfit uppercase">
-                  {work.title}
-                </h3>
-                <p className="text-gray-300 text-sm md:text-base font-light mb-6">
-                  {work.desc}
-                </p>
-
-                <div className="flex items-center gap-4">
-                  <div className="px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full text-xs font-bold text-white uppercase tracking-[2px] transition-colors duration-300">
-                    View Project <Zap className="inline-block w-3 h-3 ml-2" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Hover Glow Effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-linear-to-br from-emerald-500/10 to-transparent pointer-events-none" />
+        {/* Freelance Projects Section */}
+        {freelanceWorks.length > 0 && (
+          <div className="mb-20">
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-8 border-b border-gray-100 dark:border-white/10 pb-4">
+              Freelancing Projects
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {freelanceWorks.map((work) => (
+                <ProjectCard key={work.id} work={work} />
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
+
+        {/* Personal Projects Section */}
+        {personalWorks.length > 0 && (
+          <div>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-8 border-b border-gray-100 dark:border-white/10 pb-4">
+              Personal Projects
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {personalWorks.map((work) => (
+                <ProjectCard key={work.id} work={work} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* See More Button */}
         <div className="mt-20 flex justify-center">
           <a 
             href="https://github.com/athulcoder" 
             target="_blank" 
-            className="flex items-center justify-center gap-4 px-10 py-5 bg-white hover:bg-gray-200 text-black font-extrabold uppercase tracking-[2px] text-sm md:text-base rounded-full transition-transform duration-300 hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+            className="flex items-center justify-center gap-4 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase tracking-widest text-sm rounded-full transition-transform duration-300 hover:-translate-y-1 shadow-lg shadow-indigo-600/30"
           >
-            <Github className="w-6 h-6" /> See more in GitHub
+            <Github className="w-5 h-5" /> See more in GitHub
           </a>
         </div>
       </div>
 
       {/* Project Modal/Dialog */}
       {selectedProject && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div
             onClick={closeModal}
-            className="modal-overlay absolute inset-0 bg-black/95"
+            className="modal-overlay absolute inset-0 bg-black/80 backdrop-blur-sm"
           />
 
-          <div className="modal-content relative w-full max-w-6xl h-[90vh] overflow-hidden bg-[#0d0d0d] border border-white/10 rounded-[2rem] md:rounded-[3.5rem] shadow-[0_0_100px_rgba(0,0,0,0.8)] flex flex-col md:flex-row z-101">
+          <div className="modal-content relative w-full max-w-5xl h-[85vh] bg-white dark:bg-[#0d0d0d] border border-gray-200 dark:border-white/10 rounded-3xl shadow-2xl flex flex-col md:flex-row z-[101] overflow-hidden">
             {/* Modal Visual Area */}
-            <div className="w-full md:w-[45%] h-[40%] md:h-full relative bg-black/40 overflow-hidden border-b md:border-b-0 md:border-r border-white/10 shrink-0">
+            <div className="w-full md:w-2/5 h-64 md:h-full relative bg-gray-100 dark:bg-black/40 border-b md:border-b-0 md:border-r border-gray-200 dark:border-white/10 shrink-0">
               <img
                 src={selectedProject.imagePath}
                 alt={selectedProject.title}
                 loading="lazy"
-                className="w-full h-full object-cover opacity-70"
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-[#0d0d0d] via-transparent to-transparent" />
-
-              <div className="absolute top-6 left-6 md:top-12 md:left-12">
-                <span className="px-6 py-2 md:px-8 md:py-3 bg-emerald-500/20 border border-emerald-500/40 rounded-full text-emerald-400 text-[10px] font-bold uppercase tracking-[4px]">
+              <div className="absolute top-6 left-6">
+                <span className="px-4 py-1.5 bg-white/90 dark:bg-black/80 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-full text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest">
                   {selectedProject.category}
                 </span>
               </div>
@@ -190,77 +199,75 @@ const ShowcaseSection = () => {
             {/* Modal Content area */}
             <div 
               data-lenis-prevent="true"
-              className="w-full md:w-[55%] p-8 md:p-16 overflow-y-auto bg-linear-to-br from-[#0d0d0d] to-black custom-scrollbar font-outfit"
+              className="w-full md:w-3/5 p-8 md:p-12 overflow-y-auto custom-scrollbar font-outfit"
             >
-              <div className="flex justify-between items-start mb-12">
-                <h2 className="text-3xl md:text-6xl font-bold text-white leading-tight uppercase">
+              <div className="flex justify-between items-start mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white uppercase">
                   {selectedProject.title}
                 </h2>
                 <button
                   onClick={closeModal}
-                  className="p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-gray-400 hover:text-white transition-all duration-300"
+                  className="p-3 bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 border border-gray-200 dark:border-white/10 rounded-full text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all duration-300 shrink-0 ml-4"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="space-y-16">
-                {/* Problem Statement */}
+              <div className="space-y-10">
                 <div>
-                  <h4 className="flex items-center gap-3 text-emerald-400 font-bold uppercase tracking-[3px] text-[10px] mb-6">
-                    <Zap className="w-4 h-4 fill-emerald-400" /> The Challenge
+                  <h4 className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-widest text-xs mb-4">
+                    <Zap className="w-4 h-4" /> The Challenge
                   </h4>
-                  <p className="text-gray-300 text-xl md:text-2xl leading-relaxed font-light italic opacity-90 border-l-[6px] border-emerald-500/40 pl-8 py-3 bg-white/5 rounded-r-2xl">
+                  <p className="text-slate-700 dark:text-slate-300 text-lg leading-relaxed font-medium italic border-l-4 border-indigo-500/40 pl-6 py-2">
                     "{selectedProject.problemStatement}"
                   </p>
                 </div>
 
-                {/* Detailed Solution */}
                 <div>
-                  <h4 className="text-gray-500 font-bold uppercase tracking-[3px] text-[10px] mb-6 pl-2 border-l-2 border-white/20">
+                  <h4 className="text-gray-500 font-bold uppercase tracking-widest text-xs mb-4">
                     The Solution
                   </h4>
-                  <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
+                  <p className="text-gray-700 dark:text-gray-400 text-base leading-relaxed font-light">
                     {selectedProject.detailedSolution}
                   </p>
                 </div>
 
-                {/* Tech Stack Icons */}
                 <div>
-                  <h4 className="text-gray-500 font-bold uppercase tracking-[3px] text-[10px] mb-8">
-                    Tools of the Trade
+                  <h4 className="text-gray-500 font-bold uppercase tracking-widest text-xs mb-6">
+                    Tools & Technologies
                   </h4>
-                  <div className="flex flex-wrap gap-4">
+                  <div className="flex flex-wrap gap-3">
                     {selectedProject.techStack.map((tech) => (
                       <div
                         key={tech.name}
-                        className="group/tech flex items-center gap-4 px-6 py-4 bg-white/5 border border-white/5 rounded-2xl hover:bg-white/10 transition-all duration-500"
+                        className="flex items-center gap-3 px-4 py-2.5 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/5 rounded-xl hover:shadow-md transition-shadow duration-300"
                       >
-                        <tech.icon className="w-7 h-7 transition-transform duration-500 group-hover/tech:scale-125" style={{ color: tech.color }} />
-                        <span className="text-white text-xs font-bold uppercase tracking-[2px]">{tech.name}</span>
+                        <tech.icon className="w-5 h-5" style={{ color: tech.color }} />
+                        <span className="text-gray-900 dark:text-white text-xs font-bold uppercase tracking-widest">{tech.name}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex flex-wrap gap-6 pt-12 border-t border-white/10">
+                <div className="flex flex-wrap gap-4 pt-8 border-t border-gray-100 dark:border-white/10">
                   {selectedProject.previewUrl && (
                     <a
                       href={selectedProject.previewUrl}
                       target="_blank"
-                      className="flex items-center gap-4 px-12 py-6 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold uppercase tracking-[2px] text-xs rounded-2xl transition-all duration-500 shadow-[0_0_40px_rgba(16,185,129,0.4)] hover:shadow-[0_0_60px_rgba(16,185,129,0.6)] transform hover:-translate-y-2"
+                      className="flex items-center gap-3 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase tracking-widest text-xs rounded-full transition-colors shadow-lg shadow-indigo-600/30"
                     >
-                      <ExternalLink className="w-5 h-5" /> Live Experience
+                      <ExternalLink className="w-4 h-4" /> Live Preview
                     </a>
                   )}
-                  <a
-                    href={selectedProject.githubUrl}
-                    target="_blank"
-                    className="flex items-center gap-4 px-12 py-6 bg-white/5 hover:bg-white/1 hover:text-white text-gray-300 font-extrabold uppercase tracking-[2px] text-xs rounded-2xl transition-all duration-500 border border-white/10 hover:border-white/30 transform hover:-translate-y-2"
-                  >
-                    <Github className="w-5 h-5" /> Source Code
-                  </a>
+                  {selectedProject.githubUrl && (
+                    <a
+                      href={selectedProject.githubUrl}
+                      target="_blank"
+                      className="flex items-center gap-3 px-8 py-4 bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-900 dark:text-white font-bold uppercase tracking-widest text-xs rounded-xl transition-colors border border-gray-200 dark:border-white/10"
+                    >
+                      <Github className="w-4 h-4" /> Source Code
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

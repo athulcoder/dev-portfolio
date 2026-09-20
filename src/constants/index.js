@@ -5,8 +5,10 @@ import {
   SiNextdotjs, SiMongodb, SiTailwindcss, SiJavascript,
   SiFlask, SiPython, SiC, SiCplusplus, SiTypescript,
   SiHtml5, SiCss3, SiExpress, SiFastapi, SiPostgresql,
-  SiPrisma, SiGooglecloud, SiDocker, SiAmazonwebservices, SiTensorflow, SiOpenai
+  SiPrisma, SiGooglecloud, SiDocker, SiAmazonwebservices, SiTensorflow, SiOpenai,
+  SiDotnet, SiOracle, SiNodedotjs
 } from "react-icons/si";
+import { VscAzure } from "react-icons/vsc";
 
 const navLinks = [
   {
@@ -87,6 +89,7 @@ export const works = [
     id: 5,
     title: "MITS PRINT",
     category: "Full Stack System",
+    type: "personal",
     desc: "Automated campus printing platform eliminating queues and manual handling.",
     problemStatement: "Students face long queues and inefficiencies during lab submissions and semester deadlines in campus printing stores.",
     detailedSolution: "Developed a full-stack automated printing system where users upload documents, pay online, and receive printed output without manual interaction. Built using Next.js API routes with PostgreSQL (Prisma), integrated Google Cloud Storage for file handling, and a Python-based print agent running on a dedicated printer PC to process queued jobs.",
@@ -106,6 +109,7 @@ export const works = [
     id: 6,
     title: "CampusForge Engine",
     category: "AI / Backend System",
+    type: "personal",
     desc: "Resume analyzer that matches candidates to job roles based on skills.",
     problemStatement: "Shortlisting candidates manually during campus placements is time-consuming and often inconsistent.",
     detailedSolution: "Built an intelligent backend engine that analyzes resumes, extracts skills, and matches candidates to suitable job roles. Designed to automate shortlisting in campus placement drives, improving efficiency and accuracy in candidate selection.",
@@ -123,6 +127,7 @@ export const works = [
     id: 1,
     title: "Hostel Room Allotment System",
     category: "Desktop Application",
+    type: "personal",
     desc: "A smart room allotment system for institutional hostels.",
     problemStatement: "Manual room allotment is prone to errors, bias, and inefficiency, especially in institutions with hundreds of students.",
     detailedSolution: "Built a Swing-based admin dashboard that auto-assigns rooms based on student criteria, managing a secure SQLite database for persistence.",
@@ -139,6 +144,7 @@ export const works = [
     id: 2,
     title: "DailyDone",
     category: "Full Stack",
+    type: "personal",
     desc: "Personalized task management with secure, encrypted tracking.",
     problemStatement: "Most task managers are either overly complex or compromise on security for personal data tracking.",
     detailedSolution: "Developed a focused Next.js app with MongoDB, implementing JWT and encrypted sessions to provide a secure 'Daily Focus' experience.",
@@ -156,6 +162,7 @@ export const works = [
     id: 3,
     title: "CineQuest",
     category: "Frontend",
+    type: "personal",
     desc: "A cinematic movie discovery platform powered by TMDB API.",
     problemStatement: "Finding movie trailers and statistics across different platforms is fragmented and slow for casual viewers.",
     detailedSolution: "Crafted a high-performance Vanilla JS application using the TMDB API to fetch instant trailers, ratings, and stats with a clean UX.",
@@ -173,6 +180,7 @@ export const works = [
     id: 4,
     title: "C to PDF Converter",
     category: "Web Utility",
+    type: "personal",
     desc: "Automated lab record generator used university-wide.",
     problemStatement: "Students struggle to format raw C code correctly for printable lab records on short deadlines.",
     detailedSolution: "Created a Flask utility that parses .c files and generates professional PDFs, using WebSockets for real-time status updates.",
@@ -184,6 +192,26 @@ export const works = [
     githubUrl: "https://github.com/athulcoder/c_to_pdf",
     previewUrl: "https://c-to-pdf.onrender.com",
     featured: false,
+  },
+  {
+    id: 7,
+    title: "BookmyTraining",
+    category: "SaaS Application",
+    type: "freelance",
+    desc: "A comprehensive SaaS platform for training management.",
+    problemStatement: "Organizations need a streamlined way to manage, book, and track training sessions across multiple departments.",
+    detailedSolution: "Developed a full-stack SaaS application with Node.js, Express, and Next.js, backed by PostgreSQL. Deployed on Hostinger.",
+    techStack: [
+      { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+      { name: "Express", icon: SiExpress, color: "#000000" },
+      { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+      { name: "Tailwind", icon: SiTailwindcss, color: "#06b6d4" },
+    ],
+    imagePath: "/images/bookmytraining.png",
+    githubUrl: "",
+    previewUrl: "https://www.bookmytraining.co.in/",
+    featured: true,
   },
 
 

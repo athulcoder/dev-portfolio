@@ -1,8 +1,10 @@
 import React from "react";
 
-const Button = ({ className, text, id }) => {
+const Button = ({ className, text, id, onMouseEnter, onMouseLeave }) => {
   return (
     <a
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       onClick={(e) => {
         e.preventDefault();
 
@@ -21,8 +23,8 @@ const Button = ({ className, text, id }) => {
     >
       <div className="cta-button group">
         <div className="bg-circle" />
-        <p className="text">{text}</p>
-        <div className="arrow-wrapper">
+        <p className="text whitespace-nowrap">{text}</p>
+        <div className="arrow-wrapper shrink-0">
           <img src="/images/arrow-down.svg" alt="arrow" />
         </div>
       </div>

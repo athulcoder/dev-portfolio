@@ -33,13 +33,13 @@ const TerminalLine = ({ command, response, delay = 0 }) => {
   }, [command, delay]);
 
   return (
-    <div ref={lineRef} className="mb-4 font-mono text-sm md:text-base">
+    <div ref={lineRef} className="mb-6 font-medium text-sm md:text-base">
       <div className="flex items-center gap-2">
-        <span className="text-green-400">$</span>
-        <span className="text-white" ref={textRef}></span>
-        <span className="w-2 h-5 bg-white/50 animate-pulse"></span>
+        <span className="text-indigo-600 dark:text-indigo-400 font-bold">→</span>
+        <span className="text-slate-800 dark:text-slate-200" ref={textRef}></span>
+        <span className="w-1.5 h-5 bg-indigo-600 dark:bg-indigo-400 animate-pulse"></span>
       </div>
-      <div className="response mt-1 text-blue-300 opacity-0">{response}</div>
+      <div className="response mt-2 text-slate-500 dark:text-slate-400 opacity-0 leading-relaxed">{response}</div>
     </div>
   );
 };
@@ -92,53 +92,40 @@ const About = () => {
   }, { scope: sectionRef, dependencies: [isMobile] });
 
   return (
-    <section id="about" ref={sectionRef} className="section-padding bg-black-100 min-h-screen flex items-center overflow-hidden">
+    <section id="about" ref={sectionRef} className="section-padding bg-white dark:bg-black-100 min-h-screen flex items-center overflow-hidden transition-colors duration-300">
       <div className="container mx-auto px-5 md:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
 
           {/* LEFT: TERMINAL */}
           <div className="lg:col-span-7" ref={terminalRef}>
             <div className="max-w-2xl w-full">
-              <h2 className="text-4xl md:text-5xl font-bold mb-10 text-white leading-tight">
-                Beyond the <span className="text-blue-50">Keyboard</span>
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-10 text-slate-900 dark:text-white leading-tight">
+                Beyond the <span className="text-indigo-600 dark:text-indigo-400">Keyboard</span>
               </h2>
 
-              {/* macOS Terminal look */}
-              <div className="bg-black-200/50 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl">
-                {/* Toolbar */}
-                <div className="bg-white/5 px-4 py-3 flex items-center justify-between border-b border-white/10">
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
-                    <div className="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
-                    <div className="w-3 h-3 rounded-full bg-[#27C93F]"></div>
-                  </div>
-                  <div className="text-xs text-white/40 font-mono">athul@macbook — -zsh</div>
-                  <div className="w-12"></div>
-                </div>
-
+              {/* Clean SaaS Card look */}
+              <div className="bg-white dark:bg-slate-800/50 backdrop-blur-xl border border-gray-100 dark:border-white/10 rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:shadow-none p-8 md:p-10 min-h-[300px]">
                 {/* Content */}
-                <div className="p-6 md:p-8 min-h-[300px]">
-                  <TerminalLine
-                    command="whoami"
-                    response="Hi, I’m Athul Sabu, a BTech Computer Science student at Muthoot Institute of Technology and Science | Full Stack Developer & Tech Enthusiast"
-                    delay={0.5}
-                  />
-                  <TerminalLine
-                    command="ls skills/"
-                    response="React.js, Node.js, Express.js, Flask, GSAP, TailwindCSS, Next.js, Python, Git, Docker,GCP,AWS,Vercel"
-                    delay={2.5}
-                  />
-                  <TerminalLine
-                    command="cat location.txt"
-                    response="Kochi, Kerala, India"
-                    delay={4.5}
-                  />
-                  <TerminalLine
-                    command="echo $STATUS"
-                    response="Always learning, building, and pushing boundaries."
-                    delay={6.5}
-                  />
-                </div>
+                <TerminalLine
+                  command="Who am I?"
+                  response="Hi, I’m Athul Sabu, a BTech Computer Science student at Muthoot Institute of Technology and Science | Full Stack Developer & Tech Enthusiast"
+                  delay={0.5}
+                />
+                <TerminalLine
+                  command="Core Skills"
+                  response="React.js, Node.js, Express.js, Flask, GSAP, TailwindCSS, Next.js, Python, Git, Docker, GCP, AWS, Vercel"
+                  delay={2.5}
+                />
+                <TerminalLine
+                  command="Location"
+                  response="Kochi, Kerala, India"
+                  delay={4.5}
+                />
+                <TerminalLine
+                  command="Current Status"
+                  response="Always learning, building, and pushing boundaries."
+                  delay={6.5}
+                />
               </div>
             </div>
           </div>
