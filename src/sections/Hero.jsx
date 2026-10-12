@@ -29,13 +29,13 @@ const Hero = () => {
   return (
     <section id="hero" className="relative overflow-hidden bg-gray-50 dark:bg-black transition-colors duration-1000">
       {/* Animated Hover Background */}
-      <div 
+      <div
         className={`absolute inset-0 z-0 transition-opacity duration-700 pointer-events-none mix-blend-multiply dark:mix-blend-screen ${isHovered ? 'opacity-100' : 'opacity-0'}`}
         style={{
           background: 'radial-gradient(circle at 30% 50%, rgba(79, 70, 229, 0.15) 0%, transparent 60%)'
         }}
       />
-      
+
       <div className="absolute top-0 left-0 z-10 hidden dark:block opacity-50">
         <img src="/images/bg.png" alt="background" loading="lazy" />
       </div>
@@ -73,7 +73,7 @@ const Hero = () => {
 
             </p>
             <div className="flex flex-wrap sm:flex-nowrap items-center gap-4 mt-6 z-999">
-              <div className="md:w-52 h-14 w-44 cursor-pointer" onClick={() => window.open('/athul-sabu-resume.pdf', "_blank")}>
+              <div className="md:w-52 h-14 w-44 cursor-pointer" onClick={() => window.open('/ATHUL_SABU.pdf', "_blank")}>
                 <div className="w-full h-full rounded-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 shadow-lg shadow-indigo-600/30 transition-all duration-300 flex items-center justify-center hover:-translate-y-1">
                   <p className="text-white font-bold tracking-wide uppercase text-sm md:text-base">Resume</p>
                 </div>
@@ -102,7 +102,7 @@ const Hero = () => {
       </div>
       <GithubCalendarComponent />
       <div className="flex flex-col items-center justify-center gap-4">
-        <TerminalCommand/>
+        <TerminalCommand />
         <InteractiveTerminal />
       </div>
     </section>
